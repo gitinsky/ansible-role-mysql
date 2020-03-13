@@ -11,6 +11,7 @@
   become_user: mysql
   register: result
   ignore_errors: True
+  changed_when: False
 
 - name: set MySQL root password
   command: mysqladmin password {{ mysql_root_password }}
