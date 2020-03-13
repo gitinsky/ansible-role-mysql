@@ -2,6 +2,9 @@
 - name: install mysql
   yum: name=mariadb-server state=present
 
+- name: start the service
+  service: name=mariadb state=started enabled=yes
+
 - name: check if MySQL root password is set
   shell: mysql -e 'select 1'
   register: result
