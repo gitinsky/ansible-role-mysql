@@ -1,18 +1,5 @@
----
-- name: install mysql-server
-  apt: name=mysql-server state=present
+- include_tasks: RedHat.yml
+  when: ansible_os_family  == "RedHat"
 
-- name: check if MySQL root password is set
-  shell: mysql -e 'select 1'
-  register: result
-  ignore_errors: True
-
-- name: print result
-  debug: var=result
-
-- name: set MySQL root password
-  shell: mysqladmin password {{ mysql_root_password }}
-  when: result.rc==0
-
-- name: put .my.cnf
-  template: src=.my.cnf dest=/root/.my.cnf
+- include_tasks: Debian.yml
+  when: ansible_os_family  == "Debian" or ansible_os_family == "Linuxmint"
