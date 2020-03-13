@@ -6,14 +6,14 @@
   service: name=mariadb state=started enabled=yes
 
 - name: check if MySQL root password is set
-  shell: mysql -e 'select 1'
+  command: mysql -e 'select 1' mysql
   become: yes
   become_user: mysql
   register: result
   ignore_errors: True
 
 - name: set MySQL root password
-  shell: mysqladmin password {{ mysql_root_password }}
+  command: mysqladmin password {{ mysql_root_password }}
   when: result.rc==0
 
 - name: put .my.cnf
