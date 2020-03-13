@@ -1,6 +1,6 @@
 ---
 - name: install mysql
-  yum: name=mariadb state=present
+  yum: name=mariadb-server state=present
 
 - name: check if MySQL root password is set
   shell: mysql -e 'select 1'
